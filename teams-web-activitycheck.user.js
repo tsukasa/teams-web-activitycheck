@@ -1,13 +1,14 @@
 // ==UserScript==
-// @name         Teams Web - Activity Check with Idle Detector
+// @name         Microsoft Teams Web - Activity Check with Idle Detector
 // @namespace    http://tampermonkey.net/
-// @version      2024-01-10_01-00
+// @version      2026-02-25_01-00
 // @description  Makes Teams' activity check use the Idle Detector API so activity is tracked not only within the tab, but system-wide.
 // @author       tsukasa
 // @homepage     https://github.com/tsukasa/teams-web-activitycheck
 // @updateURL    https://raw.githubusercontent.com/tsukasa/teams-web-activitycheck/master/teams-web-activitycheck.user.js
 // @downloadURL  https://raw.githubusercontent.com/tsukasa/teams-web-activitycheck/master/teams-web-activitycheck.user.js
-// @match        https://teams.microsoft.com/*
+// @match        https://teams.microsoft.com/v2/*
+// @match        https://teams.cloud.microsoft/*
 // @icon         data:image/png;base64,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
 // @grant        none
 // @run-at       document-idle
@@ -62,15 +63,15 @@
      */
     const createConsoleProxy = () => {
         // Create dummy iframe to steal its fresh console object
-        const iframe = document.createElement("iframe");
+        const iframe = document.createElement('iframe');
 
         // Add iframe to current window's scope in a hidden state
-        iframe.id = "console-proxy";
-        iframe.style.display = "none";
-        document.body.insertAdjacentElement("beforeend", iframe);
+        iframe.id = 'console-proxy';
+        iframe.style.display = 'none';
+        document.body.insertAdjacentElement('beforeend', iframe);
 
         // Reassign value of console to iframe's console
-        const proxyIframe = document.querySelector("#console-proxy");
+        const proxyIframe = document.querySelector('#console-proxy');
         window.__tm_console = proxyIframe.contentWindow.console;
 
         if("__tm_console" in window) {
