@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Microsoft Teams Web - Activity Check with Idle Detector
 // @namespace    http://tampermonkey.net/
-// @version      2026-02-25_01-00
+// @version      2026-05-17_01-00
 // @description  Makes Teams' activity check use the Idle Detector API so activity is tracked not only within the tab, but system-wide.
 // @author       tsukasa
 // @homepage     https://github.com/tsukasa/teams-web-activitycheck
@@ -22,7 +22,7 @@
      * HOW TO USE:                                                                                 *
      * 1. Install and enable the script.                                                           *
      * 2. Reload the Teams web client.                                                             *
-     * 3. Now click on the Teams icon in the top left of Teams.                                    *
+     * 3. Now click on the Collapse App Bar button in the top left of Teams.                       *
      * 4. A popup that asks for Idle Detector permissions should pop up. Grant the permissions.    *
      * 5. Congratulations, from now on it should just work.                                        *
      ***********************************************************************************************/
@@ -30,7 +30,7 @@
     const _intervalMin = 1 * 60 * 1000;
     const _intervalMax = 2 * 60 * 1000;
 
-    const _titlebarIconSelector = "svg[data-tid='titlebar-teams-icon']";
+    const _titlebarIconSelector = "button[data-tid='hamburger-button']";
 
     /**
      * Mechanisms:
